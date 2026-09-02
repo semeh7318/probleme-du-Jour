@@ -1,6 +1,3 @@
-
-// J’ai un seau de paresseux. Chaque paresseux est spécial et possède un nom long.
-// Ci-dessous se trouve un tableau appelé seauDeParesseux, contenant toutes les informations sur mes paresseux.
 var seauDeParesseux = [
   { nom: { prenom: "Poilu", deuxiemePrenom: "Dangereux", nomDeFamille: "Assassin" }, age: 2 },
   { nom: { prenom: "Lent", nomDeFamille: "Citrouille" }, age: 3 },
@@ -9,33 +6,62 @@ var seauDeParesseux = [
   { nom: { prenom: "Jungle", nomDeFamille: "Duveteux" }, age: 2 },
 ];
 
-// a- écrire une fonction fullName qui prend en entrée un index et un tableau
-// et retourne le nom complet sous forme de chaîne de caractères
-// nomComplet(seauDeParesseux,0) //==> "Poilu Dangereux Assassin"
 function nomComplet(tableau, position) {
-  // votre code ici
+  const { prenom, deuxiemePrenom, nomDeFamille } = tableau[position].nom;
+  return [prenom, deuxiemePrenom, nomDeFamille].filter(Boolean).join(" ");
 }
 
-// b- écrire une fonction qui prend un tableau d’objets (comme seauDeParesseux)
-// et retourne le paresseux (doit retourner un objet)
-// qui possède le nom le plus long (prénom, deuxième prénom & nom).
-// Remarque : il peut être utile d’utiliser la fonction nomComplet,
-// plusLongNom(seauDeParesseux);
-// => { nom: { prenom: "Poilu", deuxiemePrenom: "Dangereux", nomDeFamille: "Assassin" }, age: 2 }
-function plusLongNom(seauDeParesseux) {
-  // TODO : votre code ici
+function plusLongNom(tableau) {
+  let indexPlusLong = 0;
+  let longueurMax = nomComplet(tableau, 0).length;
+  for (let i = 1; i < tableau.length; i++) {
+    const longueurActuelle = nomComplet(tableau, i).length;
+    if (longueurActuelle > longueurMax) {
+      longueurMax = longueurActuelle;
+      indexPlusLong = i;
+    }
+  }
+  return tableau[indexPlusLong];
 }
 
-// - créer un modèle de données pour représenter vos camarades de classe
-// - réfléchir aux différents attributs de vos camarades : qu’ont-ils tous en commun ?
-// - créer une fonction factory (fonction d'usine).
-// - créer un tableau pour contenir les camarades que vous avez créés.
-// - écrire une fonction appelée afficherAmi qui prend un camarade en argument
-//   et retourne les informations importantes de manière lisible.
-// - écrire une fonction appelée ajouterAmi qui prend un camarade en argument
-//   et l’ajoute au tableau camarades.
-// - calculer le nombre d’amis masculins que contient votre classe
-//   en écrivant une fonction appelée nombredeMale.
-// - écrire une fonction recherche qui, étant donné une requête (query)
-//   et un tableau de camarades ,
-//   cherche dans le tableau des camarades un camarade « correspondant ».
+function creerCamarade(prenom, nom, age, genre, ville, passeTemps) {
+  return { prenom, nom, age, genre, ville, passeTemps };
+}
+
+var camarades = [];
+
+camarades.push(creerCamarade("Amine", "Ben Salah", 21, "M", "Tunis", "football"));
+camarades.push(creerCamarade("Sarra", "Trabelsi", 22, "F", "Sfax", "lecture"));
+camarades.push(creerCamarade("Youssef", "Gharbi", 20, "M", "Sousse", "jeux vidéo"));
+camarades.push(creerCamarade("Lina", "Kefi", 23, "F", "Tunis", "peinture"));
+
+function afficherAmi(camarade) {
+  return `${camarade.prenom} ${camarade.nom}, ${camarade.age} ans, originaire de ${camarade.ville}, aime ${camarade.passeTemps}.`;
+}
+
+function ajouterAmi(camarade) {
+  camarades.push(camarade);
+  return camarades;
+}
+
+function nombredeMale(tableauCamarades) {
+  return tableauCamarades.filter((camarade) => camarade.genre === "M").length;
+}
+
+function recherche(query, tableauCamarades) {
+  const q = query.toLowerCase();
+  return tableauCamarades.filter((camarade) => {
+    return (
+      camarade.prenom.toLowerCase().includes(q) ||
+      camarade.nom.toLowerCase().includes(q) ||
+      camarade.ville.toLowerCase().includes(q)
+    );
+  });
+}
+
+console.log(nomComplet(seauDeParesseux, 0));
+console.log(plusLongNom(seauDeParesseux));
+console.log(afficherAmi(camarades[0]));
+ajouterAmi(creerCamarade("Karim", "Jlassi", 24, "M", "Bizerte", "natation"));
+console.log(nombredeMale(camarades));
+console.log(recherche("tunis", camarades));
