@@ -7,5 +7,26 @@
  * console.log(onlyEven); // 4
  */
 var evenOccurrence = function(arr) {
-  // Votre code ici.
+
+  const compteur = {};
+
+  for (const element of arr) {
+    if (compteur[element] === undefined) {
+      compteur[element] = 1;
+    } else {
+      compteur[element]++;
+    }
+  }
+
+  for (const element of arr) {
+    if (compteur[element] % 2 === 0) {
+      return element;
+    }
+  }
+
+  return null;
 };
+
+
+var onlyEven = evenOccurrence([1, 7, 2, 4, 5, 6, 8, 9, 6, 4]);
+console.log(onlyEven); 
