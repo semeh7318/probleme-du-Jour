@@ -1,4 +1,4 @@
-```javascript
+
 //=======================================================================
 //                                  Q1
 //=======================================================================
@@ -14,8 +14,12 @@
 // ==> [ 'BONJOUR', 'MONDE', 'TOURNE', 'POIS' ]
 
 function mettreEnMajuscules(tableauChaines) {
+    return tableauChaines.map(function (chaine) {
+        return chaine.toUpperCase();
+    });
 }
-
+var tableauChaines = ['bonjour', 'monde', 'tourne', 'pois'];
+console.log("Q1 :", mettreEnMajuscules(tableauChaines));
 
 //=============================================================================
 //                                  Q2
@@ -55,7 +59,11 @@ var donnees = [
 // ]
 
 function paysLesPlusPeuples(tableauPays) {
+    return tableauPays.filter(function (element) {
+        return element.population > 500000000;
+    });
 }
+console.log("Q2 :", paysLesPlusPeuples(donnees));
 
 
 //=============================================================================
@@ -72,8 +80,12 @@ function paysLesPlusPeuples(tableauPays) {
 // diviserParDeux(tableauNombres); ==> [1, 3, 10, 4, 7]
 
 function diviserParDeux(tableauNombres) {
+    return tableauNombres.map(function (nombre) {
+        return nombre / 2;
+    });
 }
-
+var tableauNombres = [2, 6, 20, 8, 14];
+console.log("Q3 :", diviserParDeux(tableauNombres));
 
 //=============================================================================
 //                                  Q4
@@ -91,7 +103,15 @@ function diviserParDeux(tableauNombres) {
 // ==> [5, 'quelque chose', 129]
 
 function valeurs(objet) {
+    return Object.keys(objet).map(function (cle) {
+        return objet[cle];
+    });
 }
+console.log(valeurs({
+    premier: 5,
+    deuxieme: 'quelque chose',
+    troisieme: 129
+}));
 
 
 //=============================================================================
@@ -106,5 +126,17 @@ function valeurs(objet) {
 // ==> "a"
 
 function chaineLaPlusCourte(tableauChaines) {
+    var plusCourte = tableauChaines[0];
+
+    for (var i = 1; i < tableauChaines.length; i++) {
+        if (tableauChaines[i].length < plusCourte.length) {
+            plusCourte = tableauChaines[i];
+        }
+    }
+
+    return plusCourte;
 }
-```
+
+
+console.log(chaineLaPlusCourte(["salut", "a", "longue", "oui"])); 
+
