@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "host": "127.0.0.1",
+  "port": 50791,
+  "token": "39eaaa791e8b5125036f1dd357f1cc858de1654b5dc138f02acc75ed27169bf5",
+  "endpoint": "/mcp",
+  "transport": "streamable-http"
+}

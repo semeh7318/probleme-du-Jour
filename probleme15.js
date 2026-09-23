@@ -126,17 +126,10 @@ console.log(valeurs({
 // ==> "a"
 
 function chaineLaPlusCourte(tableauChaines) {
-    var plusCourte = tableauChaines[0];
-
-    for (var i = 1; i < tableauChaines.length; i++) {
-        if (tableauChaines[i].length < plusCourte.length) {
-            plusCourte = tableauChaines[i];
-        }
-    }
-
-    return plusCourte;
+    return tableauChaines.reduce(function (plusCourte, courante) {
+        return courante.length < plusCourte.length ? courante : plusCourte;
+    });
 }
 
-
-console.log(chaineLaPlusCourte(["salut", "a", "longue", "oui"])); 
+console.log("Q5 (reduce) :", chaineLaPlusCourte(["salut", "a", "longue", "oui"]));
 
